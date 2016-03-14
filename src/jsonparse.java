@@ -5,15 +5,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Jsonparse {
+public class jsonparse {
 
-    public static void main(String[] args) {
         JSONParser parser = new JSONParser();
+        Jsonweb linn;
 
-        try {
+        jsonparse(Jsonweb linn) {
+            this.linn = linn;
+        }
 
-            Object obj = parser.parse(new FileReader(
-                    "C:/Users/Ako oma/Documents/json2.txt"));
+        //try {
+            Jsonweb linn_andmed = new Jsonweb(linn);
+            String object = String.parseString(linn_andmed);
+
+            Object obj = parser.parse(object));
 
             JSONObject jsonObject = (JSONObject) obj;
 
@@ -29,25 +34,27 @@ public class Jsonparse {
             JSONObject sys = (JSONObject) jsonObject.get("sys");
             JSONArray weatherList = (JSONArray) jsonObject.get("weather");
 
-            System.out.println("Name: " + name);
-            System.out.println("base: " + base);
+            public String toString() {
+                return "Name: " + name;
+            }
+
+            //System.out.println("base: " + base);
             //System.out.println("id: " + id);
             //System.out.println("cod: " + cod);
             //System.out.println("dt: " + dt);
-            System.out.println("wind: " + wind);
-            System.out.println("main: " + main);
-            System.out.println("clouds: " + clouds);
-            System.out.println("sys: " + sys);
-            System.out.println("Coord: " + coord);
-            System.out.println("main: temp: " + main.get("temp"));
-            System.out.println("weatherList:");
-            Iterator<JSONObject> iterator = weatherList.iterator();
-            while (iterator.hasNext()) {
-                System.out.println(iterator.next());
-            }
+            //System.out.println("wind: " + wind);
+            //System.out.println("main: " + main);
+            //System.out.println("clouds: " + clouds);
+            //System.out.println("sys: " + sys);
+            //System.out.println("Coord: " + coord);
+            //System.out.println("main: temp: " + main.get("temp"));
+            //System.out.println("weatherList:");
+            //Iterator<JSONObject> iterator = weatherList.iterator();
+            //while (iterator.hasNext()) {
+            //    System.out.println(iterator.next());
+            //}
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //}
 }

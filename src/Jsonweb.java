@@ -4,11 +4,14 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class Jsonweb {
+
     private String city;
 
     Jsonweb(String city){
         this.city = city;
     }
+
+
 
     String getCity(){
         return city;
@@ -28,6 +31,7 @@ public class Jsonweb {
             System.out.println(e.getMessage());
             andmed = "error";
         }
+
         return andmed;
     }
 }
