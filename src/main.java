@@ -36,6 +36,8 @@ public class Main {
                 + daylight_time.getMinutes() + " minutit ja " + daylight_time.getSeconds() + " sekundit.");
 
 
+        RandomCity randomcity = new RandomCity();
+        System.out.println(randomcity.find());
 
     }
 }
