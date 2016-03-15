@@ -1,62 +1,42 @@
-import java.io.FileReader;
-import java.util.Iterator;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import javax.swing.JOptionPane;
 
 public class Main {
 
     public static void main(String[] args){
-        JSONParser parser = new JSONParser();
-        Jsonweb test2 = new Jsonweb("Tartu");
-        String linn = test2.getData();
+
+        // Mis piirkonna kohta on infot vaja?
+        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja?", "Asukoht",
+                JOptionPane.QUESTION_MESSAGE);
+        Jsonparse andmed = new Jsonparse(city);
+
+        System.out.println("\t\t\t" + andmed.getName() + " - " + andmed.getWeatherDescription() + "\n");
+        //System.out.println(andmed.getWeatherMain());
+        //System.out.println(andmed.getWeatherDescription());
+        System.out.println("\tTemperatuur: " + andmed.getTemp() + "°C");
+        //System.out.println("\tTuulekiirus " + andmed.getWindSpeed() + " m/s");
+        System.out.println("\tTuul puhub " + andmed.getWindDirection() + " kiirusel " + andmed.getWindSpeed() + " m/s. ");
+        System.out.println("\tPilvisus: " + andmed.getClouds() + "%");
+        System.out.println("\tÕhuniiskus: " + andmed.getHumidity() + "%");
+        System.out.println("\tÕhurõhk: " + andmed.getPressure() + " hPa");
+
+        //System.out.println("Coords " + andmed.getCoordLon() + ", " + andmed.getCoordLat());
+        //System.out.println("Tuulesuund: " + andmed.getWindDeg() + " kraadi");
+
+        long sunrise = (Long) andmed.getSunrise();
+        long sunset = (Long) andmed.getSunset();
+        long daylight = sunset-sunrise;
+
+        java.sql.Time sunrise_time=new java.sql.Time(sunrise*1000);
+        java.sql.Time sunset_time=new java.sql.Time(sunset*1000);
+        java.sql.Time daylight_time=new java.sql.Time(daylight*1000);
+
+        System.out.println("\tPäike tõuseb kell: " + sunrise_time + " ");
+        System.out.println("\tPäike loojub kell: " + sunset_time + " ");
+        System.out.println("\tValgust on meil täna " + daylight_time.getHours() + " tundi, "
+                + daylight_time.getMinutes() + " minutit ja " + daylight_time.getSeconds() + " sekundit.");
 
 
-        try {
 
-            //String object = String.parseString(linn_andmed);
-
-            Object obj = parser.parse(linn);
-
-            JSONObject jsonObject = (JSONObject) obj;
-
-            String name = (String) jsonObject.get("name");
-            String base = (String) jsonObject.get("base");
-            //long id = (long) jsonObject.get("id");
-            //long cod = (long) jsonObject.get("cod");
-            //long dt = (long) jsonObject.get("dt");
-            JSONObject coord = (JSONObject) jsonObject.get("coord");
-            JSONObject main1 = (JSONObject) jsonObject.get("Main");
-            JSONObject wind = (JSONObject) jsonObject.get("wind");
-            JSONObject clouds = (JSONObject) jsonObject.get("clouds");
-            JSONObject sys = (JSONObject) jsonObject.get("sys");
-            JSONArray weatherList = (JSONArray) jsonObject.get("weather");
-
-
-            //return "Name: " + name;
-
-            System.out.println("name: " + name);
-            System.out.println("base: " + base);
-            //System.out.println("id: " + id);
-            //System.out.println("cod: " + cod);
-            //System.out.println("dt: " + dt);
-            System.out.println("wind: " + wind);
-            System.out.println("Main: " + main1);
-            System.out.println("clouds: " + clouds);
-            System.out.println("sys: " + sys);
-            System.out.println("Coord: " + coord);
-            //System.out.println("Main: temp: " + main1.get("temp"));
-            System.out.println("weatherList:");
-            Iterator<JSONObject> iterator = weatherList.iterator();
-            while (iterator.hasNext()) {
-                System.out.println(iterator.next());
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }
 
-//asddddasdasd

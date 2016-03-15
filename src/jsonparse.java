@@ -1,60 +1,138 @@
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-//public class jsonparse {
-        //JSONParser parser = new JSONParser();
-        //String linn;
+class Jsonparse {
+    private String city;
+    private String name;
+    private String base;
+    private JSONObject coord;
+    private JSONObject main1;
+    private JSONObject wind;
+    private JSONObject clouds;
+    private JSONObject sys;
+    private JSONArray weatherList;
+    private Object main_inf;
+    private Object description;
 
-        //jsonparse(String linn){
-        //this.linn = linn;
-        //}
+    Jsonparse(String city){
+        this.city = city;
+        weatherdata(city);
+    }
+    private void weatherdata(String city) {
+        JSONParser parser = new JSONParser();
+        Jsonweb test2 = new Jsonweb(city);
+        String linn = test2.getData();
 
-        //try {
+        try {
+            Object obj = parser.parse(linn);
+            JSONObject jsonObject = (JSONObject) obj;
 
-            //String object = String.parseString(linn_andmed);
-
-            //Object obj = parser.parse(linn);
-
-            //JSONObject jsonObject = (JSONObject) obj;
-
-            //String name = (String) jsonObject.get("name");
-            //String base = (String) jsonObject.get("base");
+            name = (String) jsonObject.get("name");
+            base = (String) jsonObject.get("base");
             //long id = (long) jsonObject.get("id");
             //long cod = (long) jsonObject.get("cod");
             //long dt = (long) jsonObject.get("dt");
-            //JSONObject coord = (JSONObject) jsonObject.get("coord");
-            //JSONObject main = (JSONObject) jsonObject.get("Main");
-            //JSONObject wind = (JSONObject) jsonObject.get("wind");
-            //JSONObject clouds = (JSONObject) jsonObject.get("clouds");
-            //JSONObject sys = (JSONObject) jsonObject.get("sys");
-            //JSONArray weatherList = (JSONArray) jsonObject.get("weather");
+            coord = (JSONObject) jsonObject.get("coord");
+            main1 = (JSONObject) jsonObject.get("main");
+            wind = (JSONObject) jsonObject.get("wind");
+            clouds = (JSONObject) jsonObject.get("clouds");
+            sys = (JSONObject) jsonObject.get("sys");
+            weatherList = (JSONArray) jsonObject.get("weather");
 
+            for (Object o : weatherList) {
+                JSONObject jsonLineItem = (JSONObject) o;
+                main_inf = jsonLineItem.get("main");
+                description = jsonLineItem.get("description");
+                //System.out.println(main_inf);
+                //System.out.println(description);
+            }
 
-            //return "Name: " + name;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    String getName(){
+        return name;
+    }
 
-            //System.out.println("base: " + base);
-            //System.out.println("id: " + id);
-            //System.out.println("cod: " + cod);
-            //System.out.println("dt: " + dt);
-            //System.out.println("wind: " + wind);
-            //System.out.println("Main: " + Main);
-            //System.out.println("clouds: " + clouds);
-            //System.out.println("sys: " + sys);
-            //System.out.println("Coord: " + coord);
-            //System.out.println("Main: temp: " + Main.get("temp"));
-            //System.out.println("weatherList:");
-            //Iterator<JSONObject> iterator = weatherList.iterator();
-            //while (iterator.hasNext()) {
-            //    System.out.println(iterator.next());
-            //}
+    String getBase(){
+        return base;
+    }
 
-//        } catch (Exception e) {
-  //          e.printStackTrace();
-    //    }
+    Object getCoordLon(){
+        return coord.get("lon");
+    }
 
-//}
+    Object getCoordLat(){
+        return coord.get("lat");
+    }
+
+    Object getTemp(){
+        return main1.get("temp");
+    }
+
+    Object getPressure(){
+        return main1.get("pressure");
+    }
+
+    Object getHumidity(){
+        return main1.get("humidity");
+    }
+
+    Object getTempMin(){
+        return main1.get("temp_min");
+    }
+
+    Object getTempMax(){
+        return main1.get("temp_max");
+    }
+
+    Object getWindSpeed(){
+        return wind.get("speed");
+    }
+
+    Object getWindDeg(){
+        return wind.get("deg");
+    }
+
+    Object getClouds(){
+        return clouds.get("all");
+    }
+
+    Object getSunrise(){
+        return sys.get("sunrise");
+    }
+
+    Object getSunset(){
+        return sys.get("sunset");
+    }
+
+    Object getWeatherMain(){
+        return main_inf;
+    }
+
+    Object getWeatherDescription(){
+        return description;
+    }
+
+    // Lause on formaadis "Tuul puhub " + getWindDirection();
+    String getWindDirection(){
+        //double deg = (Double) getWindDeg();
+        double deg = new Double(getWindDeg().toString());
+
+        double val = (deg/45)-22.5;
+        ArrayList<String> suunad = new ArrayList<String>();
+        suunad.addAll(Arrays.asList("põhjast", "kirdest", "idast", "kagust", "lõunast", "edelast", "läänest", "loodest"));
+
+        return suunad.get((int)val%8);
+
+    }
+
+}
