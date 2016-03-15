@@ -5,38 +5,37 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class Jsonparse {
+//public class jsonparse {
+        //JSONParser parser = new JSONParser();
+        //String linn;
 
-        JSONParser parser = new JSONParser();
-        Jsonweb linn;
-
-        Jsonparse(Jsonweb linn) {
-            this.linn = linn;
-        }
+        //jsonparse(String linn){
+        //this.linn = linn;
+        //}
 
         //try {
-            Jsonweb linn_andmed = new Jsonweb(linn);
-            String object = String.parseString(linn_andmed);
 
-            Object obj = parser.parse(object));
+            //String object = String.parseString(linn_andmed);
 
-            JSONObject jsonObject = (JSONObject) obj;
+            //Object obj = parser.parse(linn);
 
-            String name = (String) jsonObject.get("name");
-            String base = (String) jsonObject.get("base");
+            //JSONObject jsonObject = (JSONObject) obj;
+
+            //String name = (String) jsonObject.get("name");
+            //String base = (String) jsonObject.get("base");
             //long id = (long) jsonObject.get("id");
             //long cod = (long) jsonObject.get("cod");
             //long dt = (long) jsonObject.get("dt");
-            JSONObject coord = (JSONObject) jsonObject.get("coord");
-            JSONObject main = (JSONObject) jsonObject.get("Main");
-            JSONObject wind = (JSONObject) jsonObject.get("wind");
-            JSONObject clouds = (JSONObject) jsonObject.get("clouds");
-            JSONObject sys = (JSONObject) jsonObject.get("sys");
-            JSONArray weatherList = (JSONArray) jsonObject.get("weather");
+            //JSONObject coord = (JSONObject) jsonObject.get("coord");
+            //JSONObject main = (JSONObject) jsonObject.get("Main");
+            //JSONObject wind = (JSONObject) jsonObject.get("wind");
+            //JSONObject clouds = (JSONObject) jsonObject.get("clouds");
+            //JSONObject sys = (JSONObject) jsonObject.get("sys");
+            //JSONArray weatherList = (JSONArray) jsonObject.get("weather");
 
-            public String toString() {
-                return "Name: " + name;
-            }
+
+            //return "Name: " + name;
+
 
             //System.out.println("base: " + base);
             //System.out.println("id: " + id);
@@ -54,7 +53,8 @@ public class Jsonparse {
             //    System.out.println(iterator.next());
             //}
 
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //}
-}
+//        } catch (Exception e) {
+  //          e.printStackTrace();
+    //    }
+
+//}
