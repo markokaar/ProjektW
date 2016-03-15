@@ -27,7 +27,7 @@ public class Main {
             //long cod = (long) jsonObject.get("cod");
             //long dt = (long) jsonObject.get("dt");
             JSONObject coord = (JSONObject) jsonObject.get("coord");
-            JSONObject main = (JSONObject) jsonObject.get("Main");
+            JSONObject main1 = (JSONObject) jsonObject.get("Main");
             JSONObject wind = (JSONObject) jsonObject.get("wind");
             JSONObject clouds = (JSONObject) jsonObject.get("clouds");
             JSONObject sys = (JSONObject) jsonObject.get("sys");
@@ -36,22 +36,22 @@ public class Main {
 
             //return "Name: " + name;
 
-
+            System.out.println("name: " + name);
             System.out.println("base: " + base);
             //System.out.println("id: " + id);
             //System.out.println("cod: " + cod);
             //System.out.println("dt: " + dt);
-            //System.out.println("wind: " + wind);
-            //System.out.println("Main: " + Main);
-            //System.out.println("clouds: " + clouds);
-            //System.out.println("sys: " + sys);
-            //System.out.println("Coord: " + coord);
-            //System.out.println("Main: temp: " + Main.get("temp"));
-            //System.out.println("weatherList:");
-            //Iterator<JSONObject> iterator = weatherList.iterator();
-            //while (iterator.hasNext()) {
-            //    System.out.println(iterator.next());
-            //}
+            System.out.println("wind: " + wind);
+            System.out.println("Main: " + main1);
+            System.out.println("clouds: " + clouds);
+            System.out.println("sys: " + sys);
+            System.out.println("Coord: " + coord);
+            //System.out.println("Main: temp: " + main1.get("temp"));
+            System.out.println("weatherList:");
+            Iterator<JSONObject> iterator = weatherList.iterator();
+            while (iterator.hasNext()) {
+                System.out.println(iterator.next());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -59,3 +59,4 @@ public class Main {
     }
 }
 
+//asddddasdasd
