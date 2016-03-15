@@ -1,6 +1,6 @@
 
 
-public class main {
+public class Main {
     public static void main(String[] args){
         Jsonweb test1 = new Jsonweb("Tartu");
         Jsonweb test2 = new Jsonweb("Jõgeva");
@@ -8,6 +8,6 @@ public class main {
         System.out.println(test1.getCity());
         System.out.println(test1.getData());
         System.out.println(test2.getData());
-        System.out.println(jsonparse("Tartu"));
+        System.out.println(Jsonparse("Tartu"));
     }
 }
