@@ -29,34 +29,35 @@ class Jsonparse {
         Jsonweb test2 = new Jsonweb(city);
         String linn = test2.getData();
 
-        try {
-            Object obj = parser.parse(linn);
-            JSONObject jsonObject = (JSONObject) obj;
+            try {
+                Object obj = parser.parse(linn);
+                JSONObject jsonObject = (JSONObject) obj;
 
-            name = (String) jsonObject.get("name");
-            base = (String) jsonObject.get("base");
-            //long id = (long) jsonObject.get("id");
-            //long cod = (long) jsonObject.get("cod");
-            //long dt = (long) jsonObject.get("dt");
-            coord = (JSONObject) jsonObject.get("coord");
-            main1 = (JSONObject) jsonObject.get("main");
-            wind = (JSONObject) jsonObject.get("wind");
-            clouds = (JSONObject) jsonObject.get("clouds");
-            sys = (JSONObject) jsonObject.get("sys");
-            weatherList = (JSONArray) jsonObject.get("weather");
+                name = (String) jsonObject.get("name");
+                base = (String) jsonObject.get("base");
+                //long id = (long) jsonObject.get("id");
+                //long cod = (long) jsonObject.get("cod");
+                //long dt = (long) jsonObject.get("dt");
+                coord = (JSONObject) jsonObject.get("coord");
+                main1 = (JSONObject) jsonObject.get("main");
+                wind = (JSONObject) jsonObject.get("wind");
+                clouds = (JSONObject) jsonObject.get("clouds");
+                sys = (JSONObject) jsonObject.get("sys");
+                weatherList = (JSONArray) jsonObject.get("weather");
 
-            for (Object o : weatherList) {
-                JSONObject jsonLineItem = (JSONObject) o;
-                main_inf = jsonLineItem.get("main");
-                description = jsonLineItem.get("description");
-                //System.out.println(main_inf);
-                //System.out.println(description);
+                for (Object o : weatherList) {
+                    JSONObject jsonLineItem = (JSONObject) o;
+                    main_inf = jsonLineItem.get("main");
+                    description = jsonLineItem.get("description");
+                    //System.out.println(main_inf);
+                    //System.out.println(description);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-    }
+
 
     String getName(){
         return name;

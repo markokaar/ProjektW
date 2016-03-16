@@ -5,9 +5,11 @@ public class Main {
     public static void main(String[] args){
 
         // Mis piirkonna kohta on infot vaja?
-        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja?", "Asukoht",
+        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? Suvalise linna korral jäta lahter tühjaks.", "Asukoht",
                 JOptionPane.QUESTION_MESSAGE);
+
         Jsonparse andmed = new Jsonparse(city);
+
 
         System.out.println("\t\t\t" + andmed.getName() + " - " + andmed.getWeatherDescription() + "\n");
         //System.out.println(andmed.getWeatherMain());
@@ -36,8 +38,8 @@ public class Main {
                 + daylight_time.getMinutes() + " minutit ja " + daylight_time.getSeconds() + " sekundit.");
 
 
-        RandomCity randomcity = new RandomCity();
-        System.out.println(randomcity.find());
+        //RandomCity randomcity = new RandomCity();
+        //System.out.println("see on main " + randomcity.find());
 
     }
 }

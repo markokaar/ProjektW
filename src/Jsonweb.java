@@ -7,7 +7,15 @@ public class Jsonweb {
     private String city;
 
     Jsonweb(String city){
-        this.city = city;
+        if (city.isEmpty()){
+            RandomCity randomcity = new RandomCity();
+
+            String c = randomcity.find();
+            this.city =  c.replaceAll(" ", "_");
+        }
+        else {
+            this.city = city;
+        }
     }
     String getCity(){
         return city;
@@ -25,6 +33,7 @@ public class Jsonweb {
             andmed = input.readLine();
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("FISH");
             andmed = "error";
         }
 
