@@ -129,11 +129,13 @@ class Jsonparse {
         double deg = new Double(getWindDeg().toString());
 
         double val = (deg/45)-22.5;
+        if (val<0){
+            val = 360-val;
+        }
         ArrayList<String> suunad = new ArrayList<String>();
         suunad.addAll(Arrays.asList("põhjast", "kirdest", "idast", "kagust", "lõunast", "edelast", "läänest", "loodest"));
 
         return suunad.get((int)val%8);
-
     }
 
 }

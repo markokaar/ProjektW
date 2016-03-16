@@ -5,11 +5,15 @@ public class Main {
     public static void main(String[] args){
 
         // Mis piirkonna kohta on infot vaja?
-        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? Suvalise linna korral jäta lahter tühjaks.", "Asukoht",
+        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? \nSuvalise linna korral jäta lahter tühjaks või vajuta cancel.", "Asukoht",
                 JOptionPane.QUESTION_MESSAGE);
 
-        Jsonparse andmed = new Jsonparse(city);
+        // Kui vajutab cancel
+        if (city == null) {
+            city = "";
+        }
 
+        Jsonparse andmed = new Jsonparse(city);
 
         System.out.println("\t\t\t" + andmed.getName() + " - " + andmed.getWeatherDescription() + "\n");
         //System.out.println(andmed.getWeatherMain());
