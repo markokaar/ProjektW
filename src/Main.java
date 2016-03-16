@@ -1,11 +1,10 @@
 import javax.swing.JOptionPane;
 
 public class Main {
-
     public static void main(String[] args){
-
         // Mis piirkonna kohta on infot vaja?
-        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? \nSuvalise linna korral jäta lahter tühjaks või vajuta cancel.", "Asukoht",
+        String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? \n" +
+                "Suvalise linna korral jäta lahter tühjaks või vajuta cancel.", "Asukoht",
                 JOptionPane.QUESTION_MESSAGE);
 
         // Kui vajutab cancel
@@ -17,7 +16,6 @@ public class Main {
 
         System.out.println("\t\t\t" + andmed.getName() + " - " + andmed.getWeatherDescription() + "\n");
         //System.out.println(andmed.getWeatherMain());
-        //System.out.println(andmed.getWeatherDescription());
         System.out.println("\tTemperatuur: " + andmed.getTemp() + "°C");
         //System.out.println("\tTuulekiirus " + andmed.getWindSpeed() + " m/s");
         System.out.println("\tTuul puhub " + andmed.getWindDirection() + " kiirusel " + andmed.getWindSpeed() + " m/s. ");
@@ -28,6 +26,7 @@ public class Main {
         //System.out.println("Coords " + andmed.getCoordLon() + ", " + andmed.getCoordLat());
         //System.out.println("Tuulesuund: " + andmed.getWindDeg() + " kraadi");
 
+        // Andmed päikese kohta
         long sunrise = (Long) andmed.getSunrise();
         long sunset = (Long) andmed.getSunset();
         long daylight = sunset-sunrise;
@@ -40,10 +39,6 @@ public class Main {
         System.out.println("\tPäike loojub kell: " + sunset_time + " ");
         System.out.println("\tValgust on meil täna " + daylight_time.getHours() + " tundi, "
                 + daylight_time.getMinutes() + " minutit ja " + daylight_time.getSeconds() + " sekundit.");
-
-
-        //RandomCity randomcity = new RandomCity();
-        //System.out.println("see on main " + randomcity.find());
 
     }
 }

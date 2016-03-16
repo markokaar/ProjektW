@@ -1,7 +1,5 @@
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,10 +47,8 @@ class Jsonparse {
                     JSONObject jsonLineItem = (JSONObject) o;
                     main_inf = jsonLineItem.get("main");
                     description = jsonLineItem.get("description");
-                    //System.out.println(main_inf);
                     //System.out.println(description);
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -129,9 +125,8 @@ class Jsonparse {
         double deg = new Double(getWindDeg().toString());
 
         double val = (deg/45)-22.5;
-        if (val<0){
-            val = 360-val;
-        }
+        if (val<0) val = 360-val;
+
         ArrayList<String> suunad = new ArrayList<String>();
         suunad.addAll(Arrays.asList("põhjast", "kirdest", "idast", "kagust", "lõunast", "edelast", "läänest", "loodest"));
 
