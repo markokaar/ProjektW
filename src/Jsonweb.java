@@ -14,7 +14,7 @@ public class Jsonweb {
             this.city =  c.replaceAll(" ", "_");
         }
         else {
-            this.city = city;
+            this.city = city.replaceAll(" ", "_");
         }
     }
     String getCity(){
