@@ -6,7 +6,7 @@ public class RandomCity {
     private String suvalinn;
     String find() {
         try {
-            int arv = ThreadLocalRandom.current().nextInt(0, 74000 + 1);
+            int arv = ThreadLocalRandom.current().nextInt(1, 74000 + 1);
 
             URL linnad = new URL("http://openweathermap.org/help/city_list.txt");
             BufferedReader in = new BufferedReader(

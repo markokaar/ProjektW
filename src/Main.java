@@ -4,10 +4,10 @@ public class Main {
     public static void main(String[] args){
         // Mis piirkonna kohta on infot vaja?
         String city = JOptionPane.showInputDialog(null, "Mis piirkonna kohta infot on vaja? \n" +
-                "Suvalise linna korral jäta lahter tühjaks või vajuta cancel.", "Asukoht",
+                "Suvalise asukoha korral jäta lahter tühjaks või vajuta cancel.", "Asukoht",
                 JOptionPane.QUESTION_MESSAGE);
 
-        // Kui vajutab cancel
+        // Kui vajutab cancel, siis jätab nime tühjaks ja Jsonweb otsib siis suvalise linna
         if (city == null) {
             city = "";
         }
@@ -37,7 +37,7 @@ public class Main {
 
         System.out.println("\tPäike tõuseb kell: " + sunrise_time + " ");
         System.out.println("\tPäike loojub kell: " + sunset_time + " ");
-        System.out.println("\tValgust on meil täna " + daylight_time.getHours() + " tundi, "
+        System.out.println("\tValgust on täna " + daylight_time.getHours() + " tundi, "
                 + daylight_time.getMinutes() + " minutit ja " + daylight_time.getSeconds() + " sekundit.");
 
     }

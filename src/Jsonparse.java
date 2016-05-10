@@ -32,7 +32,7 @@ class Jsonparse {
                 JSONObject jsonObject = (JSONObject) obj;
 
                 name = (String) jsonObject.get("name");
-                base = (String) jsonObject.get("base");
+                //base = (String) jsonObject.get("base");
                 //long id = (long) jsonObject.get("id");
                 //long cod = (long) jsonObject.get("cod");
                 //long dt = (long) jsonObject.get("dt");
