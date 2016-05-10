@@ -1,3 +1,7 @@
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+
 import javax.swing.JOptionPane;
 
 
@@ -17,10 +21,91 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main extends Application{
+    List<Rectangle> kastid;
+    List<Rectangle> jooned;
+    List<String> linnad;
+    Text textMenuCity;
+    String city;
+
+
+
+    public void küljeRuudud(Group juur, String fontName, String fontName2){
+        List<Rectangle> kastid = new ArrayList<Rectangle>();
+        List<Rectangle> jooned = new ArrayList<Rectangle>();
+        List<String> linnad = new ArrayList<String>();
+        linnad.add("Tallinn");
+        linnad.add("Tartu");
+        linnad.add("Helsinki");
+        linnad.add("London");
+        linnad.add("Miami");
+        int linnadeArv = 4;
+
+
+        for(int n=0; n<=linnadeArv; n++){
+            Rectangle kast1 = new Rectangle(0, n*30, 150, 30);
+            kast1.setFill(Color.rgb(224, 228, 204));
+            Rectangle vahejoon = new Rectangle(0, (n*30)+ 28, 150, 2);
+            vahejoon.setFill(Color.rgb(0,0,0));
+            kastid.add(kast1);
+            //jooned.add(vahejoon);
+
+            juur.getChildren().add(kast1);
+            juur.getChildren().add(vahejoon);
+
+            Text textMenuCity = new Text();
+            textMenuCity.setText(linnad.get(n));
+            textMenuCity.setFont(Font.loadFont(fontName2, 18));
+            textMenuCity.setX(10);
+            textMenuCity.setY((n*30)-10);
+            juur.getChildren().add(textMenuCity);
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+        Text textAddCity = new Text();
+        textAddCity.setText("Lisa linn");
+        //textCity.setFont(javafx.scene.text.Font.font("Tahoma", 36));
+        textAddCity.setFont(Font.loadFont(fontName, 18));
+        textAddCity.setX(40);
+        textAddCity.setY(((linnadeArv+1)*30)-10);
+        juur.getChildren().add(textAddCity);
+
+
+
+        for(Rectangle kast1 : kastid) {
+
+            kast1.setOnMouseEntered(new Käsitleja(kast1, city, textMenuCity.getText()));
+            kast1.setOnMouseExited(new Käsitleja(kast1, city, textMenuCity.getText()));
+            kast1.setOnMouseClicked(new Käsitleja(kast1, city, textMenuCity.getText()));
+
+
+            //kast1.setOnMouse
+            /*
+            kast1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+                public void handle(MouseEvent me) {
+                    //System.out.println("Hiir läks kasti peale");
+                }
+            });
+            */
+        }
+
+    }
     @Override
     public void start(Stage peaLava) {
         String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
@@ -45,62 +130,32 @@ public class Main extends Application{
         gc.fillRect(150, 0, 2, 600);
 
 
-        List<Rectangle> kastid = new ArrayList<Rectangle>();
-        List<Rectangle> jooned = new ArrayList<Rectangle>();
-        int linnadeArv = 5;
+
+
+
         juur.getChildren().add(lõuend);
-        for(int n=0; n<=linnadeArv; n++){
-            Rectangle kast1 = new Rectangle(0, n*30, 150, 30);
-            kast1.setFill(Color.rgb(224, 228, 204));
-            Rectangle vahejoon = new Rectangle(0, (n*30)+ 28, 150, 2);
-            vahejoon.setFill(Color.rgb(0,0,0));
-            kastid.add(kast1);
-            //jooned.add(vahejoon);
 
-            juur.getChildren().add(kast1);
-            juur.getChildren().add(vahejoon);
 
-            Text textMenuCity = new Text();
-            textMenuCity.setText("Tallinn");
-            textMenuCity.setFont(Font.loadFont(fontName2, 18));
-            textMenuCity.setX(10);
-            textMenuCity.setY((n*30)-10);
-            juur.getChildren().add(textMenuCity);
+
+        String city = "Tartu";
+
+        /**if (city == null) {
+            city = "";
         }
+**/
 
-        Text textAddCity = new Text();
-        textAddCity.setText("Lisa linn");
-        //textCity.setFont(javafx.scene.text.Font.font("Tahoma", 36));
-        textAddCity.setFont(Font.loadFont(fontName, 18));
-        textAddCity.setX(40);
-        textAddCity.setY(((linnadeArv+1)*30)-10);
-        juur.getChildren().add(textAddCity);
-
-
-
-        for(Rectangle kast1 : kastid) {
-            kast1.setOnMouseEntered(new Käsitleja(kast1));
-            kast1.setOnMouseExited(new Käsitleja(kast1));
-            //kast1.setOnMouse
-            /*
-            kast1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent me) {
-                    //System.out.println("Hiir läks kasti peale");
-                }
-            });
-            */
-        }
+        küljeRuudud(juur, fontName, fontName2);
 
 
 
         ////////////////////////////////
         // Text and information stuff //
         ////////////////////////////////
-        String city = null;
 
-        if (city == null) {
-            city = "";
-        }
+
+
+
+
         Jsonparse andmed = new Jsonparse(city);
 
 
@@ -121,7 +176,10 @@ public class Main extends Application{
         textWeatherDesc.setY(80);
         juur.getChildren().add(textWeatherDesc);
 
-        Image image = new Image("file:resources/weather/clear.png");
+        String kirjeldus = andmed.getWeatherDescription().toString();
+        Map<String, Image> ikoon = new HashMap<String, Image>();
+        Ikoonid ikoonid = new Ikoonid(ikoon);
+        Image image = ikoonid.terminidpäeval(ikoon).get(kirjeldus);
         ImageView imageView = new ImageView();
         imageView.setImage(image);
         imageView.setX(200);
@@ -201,6 +259,7 @@ public class Main extends Application{
 /*
         Jsonparse andmed = new Jsonparse(city);
 
+
         System.out.println("\t\t\t" + andmed.getName() + " - " + andmed.getWeatherDescription() + "\n");
         //System.out.println(andmed.getWeatherMain());
         System.out.println("\tTemperatuur: " + andmed.getTemp() + "°C");
@@ -229,4 +288,5 @@ public class Main extends Application{
         */
     }
 }
+
 
