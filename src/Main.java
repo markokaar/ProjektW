@@ -1,32 +1,21 @@
 import javax.swing.JOptionPane;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Timeline;
+
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
-import javafx.scene.control.TextField;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +23,15 @@ import java.util.List;
 public class Main extends Application{
     @Override
     public void start(Stage peaLava) {
+        String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
+        String fontName2 = "file:resources/fonts/TitilliumWeb-Light.ttf";
+
         // Akna suurust muuta ei saa ja akna servad on eemaldatud.
         peaLava.setTitle("Projekt W");
         peaLava.setResizable(false);
         peaLava.initStyle(StageStyle.UTILITY);
         Group juur = new Group();
-        Canvas lõuend = new Canvas(800, 600);
+        Canvas lõuend = new Canvas(750, 460);
         GraphicsContext gc = lõuend.getGraphicsContext2D();
 
         // Draw shapes
@@ -48,33 +40,43 @@ public class Main extends Application{
         gc.fillRect(0, 0, 800, 600);
         // Linnade kast
         gc.setFill(Color.rgb(105, 210, 231));
-        gc.fillRect(0, 0, 200, 600);
+        gc.fillRect(0, 0, 150, 600);
         gc.setFill(Color.rgb(0, 0, 0));
-        gc.fillRect(200, 0, 2, 600);
+        gc.fillRect(150, 0, 2, 600);
 
 
         List<Rectangle> kastid = new ArrayList<Rectangle>();
         List<Rectangle> jooned = new ArrayList<Rectangle>();
         int linnadeArv = 5;
-
+        juur.getChildren().add(lõuend);
         for(int n=0; n<=linnadeArv; n++){
-            Rectangle kast1 = new Rectangle(0, n*48, 200, 48);
+            Rectangle kast1 = new Rectangle(0, n*30, 150, 30);
             kast1.setFill(Color.rgb(224, 228, 204));
-            //kast1.setStroke(new BasicStroke(5.0f));
-            Rectangle vahejoon = new Rectangle(0, (n*48)+ 46, 200, 2);
+            Rectangle vahejoon = new Rectangle(0, (n*30)+ 28, 150, 2);
             vahejoon.setFill(Color.rgb(0,0,0));
             kastid.add(kast1);
-            jooned.add(vahejoon);
+            //jooned.add(vahejoon);
+
+            juur.getChildren().add(kast1);
+            juur.getChildren().add(vahejoon);
+
+            Text textMenuCity = new Text();
+            textMenuCity.setText("Tallinn");
+            textMenuCity.setFont(Font.loadFont(fontName2, 18));
+            textMenuCity.setX(10);
+            textMenuCity.setY((n*30)-10);
+            juur.getChildren().add(textMenuCity);
         }
 
-        juur.getChildren().add(lõuend);
-        for(Rectangle kast : kastid){
-            juur.getChildren().add(kast);
-        }
+        Text textAddCity = new Text();
+        textAddCity.setText("Lisa linn");
+        //textCity.setFont(javafx.scene.text.Font.font("Tahoma", 36));
+        textAddCity.setFont(Font.loadFont(fontName, 18));
+        textAddCity.setX(40);
+        textAddCity.setY(((linnadeArv+1)*30)-10);
+        juur.getChildren().add(textAddCity);
 
-        for(Rectangle joon : jooned){
-            juur.getChildren().add(joon);
-        }
+
 
         for(Rectangle kast1 : kastid) {
             kast1.setOnMouseEntered(new Käsitleja(kast1));
@@ -101,16 +103,13 @@ public class Main extends Application{
         }
         Jsonparse andmed = new Jsonparse(city);
 
-        String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
-        String fontName2 = "file:resources/fonts/TitilliumWeb-Light.ttf";
-
 
         // Linna nimi - "Tartu"
         Text textCity = new Text();
         textCity.setText(andmed.getName());
         //textCity.setFont(javafx.scene.text.Font.font("Tahoma", 36));
         textCity.setFont(Font.loadFont(fontName, 36));
-        textCity.setX(400);
+        textCity.setX(200);
         textCity.setY(50);
         juur.getChildren().add(textCity);
 
@@ -118,14 +117,14 @@ public class Main extends Application{
         Text textWeatherDesc = new Text();
         textWeatherDesc.setText(andmed.getWeatherDescription().toString());
         textWeatherDesc.setFont(Font.loadFont(fontName2, 18));
-        textWeatherDesc.setX(400);
+        textWeatherDesc.setX(200);
         textWeatherDesc.setY(80);
         juur.getChildren().add(textWeatherDesc);
 
         Image image = new Image("file:resources/weather/clear.png");
         ImageView imageView = new ImageView();
         imageView.setImage(image);
-        imageView.setX(400);
+        imageView.setX(200);
         imageView.setY(100);
         juur.getChildren().add(imageView);
 
@@ -160,8 +159,8 @@ public class Main extends Application{
             Text textA = new Text();
             textA.setText(a);
             textA.setFont(Font.loadFont(fontName2, 18));
-            textA.setX(400);
-            textA.setY(300 + lugeja);
+            textA.setX(200);
+            textA.setY(230 + lugeja);
             juur.getChildren().add(textA);
 
             lugeja += 20;
@@ -177,12 +176,12 @@ public class Main extends Application{
         peaLava.show();
 
 
-        /*
-        Button LinnaNupp = new Button("Lisa linn");
-        LinnaNupp.setLayoutX(75);
-        LinnaNupp.setLayoutY(100);
+
+        Button LinnaNupp = new Button("Kustuta linn");
+        LinnaNupp.setLayoutX(655);
+        LinnaNupp.setLayoutY(15);
         juur.getChildren().add(LinnaNupp);
-        */
+
 
     }
 
