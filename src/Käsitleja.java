@@ -21,9 +21,18 @@ class Käsitleja implements EventHandler<MouseEvent> {
         this.vanalinn = vanalinn;
     }
 
+    public String getVanalinn(){
+        return vanalinn;
+    }
+
     public void handle(MouseEvent me) {
         if(me.getEventType() == MouseEvent.MOUSE_CLICKED) {
             setVanalinn(uuslinn);
+            //System.out.println("Klikkis");
+            //System.out.println(vanalinn);
+            //System.out.println(uuslinn);
+
+
         }
 
         if(me.getEventType() == MouseEvent.MOUSE_ENTERED) {
