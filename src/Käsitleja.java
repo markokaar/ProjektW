@@ -27,10 +27,13 @@ class Käsitleja implements EventHandler<MouseEvent> {
 
     public void handle(MouseEvent me) {
         if(me.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            setVanalinn(uuslinn);
+            vanalinn = uuslinn;
+            Main main = new Main();
+            main.eemalda();
+            main.informatsioon(uuslinn);
             //System.out.println("Klikkis");
             //System.out.println(vanalinn);
-            //System.out.println(uuslinn);
+
 
 
         }

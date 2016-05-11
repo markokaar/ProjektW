@@ -35,8 +35,11 @@ public class Main extends Application{
     String fontName2 = "file:resources/fonts/TitilliumWeb-Light.ttf";
     Group juur = new Group();
 
+    public Main() {
+    }
 
-    public void küljeRuudud(Group juur, String fontName, String fontName2){
+    public void küljeRuudud(){
+
         List<Rectangle> kastid = new ArrayList<Rectangle>();
         List<Rectangle> jooned = new ArrayList<Rectangle>();
         List<String> linnad = new ArrayList<String>();
@@ -125,7 +128,7 @@ public class Main extends Application{
     }
 
 
-    public void informatsioon(String aktiivneCity, Group juur, String fontName, String fontName2){
+    public void informatsioon(String aktiivneCity){
 
         Jsonparse andmed = new Jsonparse(aktiivneCity);
 
@@ -138,7 +141,7 @@ public class Main extends Application{
         textCity.setX(200);
         textCity.setY(50);
         juur.getChildren().add(textCity);
-
+        System.out.println(andmed.getName());
         // Weather description "Mostly Sunny"
         Text textWeatherDesc = new Text();
         textWeatherDesc.setText(andmed.getWeatherDescription().toString());
@@ -195,6 +198,9 @@ public class Main extends Application{
             lugeja += 20;
         }
     }
+    public void eemalda(){
+        juur.getChildren().clear();
+    }
     @Override
     public void start(Stage peaLava){
         /*String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
@@ -220,21 +226,23 @@ public class Main extends Application{
 
         juur.getChildren().add(lõuend);
 
-        aktiivneCity = "Tartu";
+        //aktiivneCity = "Tartu";
 
-        /*if (city == null) {
-            city = "";
+        if (aktiivneCity == null) {
+            aktiivneCity = "";
         }
-*/
-        küljeRuudud(juur, fontName, fontName2);
 
+
+        küljeRuudud();
 
 
         ////////////////////////////////
         // Text and information stuff //
         ////////////////////////////////
 
-        informatsioon(aktiivneCity, juur, fontName, fontName2);
+        informatsioon(aktiivneCity);
+
+
 
 
         Scene stseen = new Scene(juur);
