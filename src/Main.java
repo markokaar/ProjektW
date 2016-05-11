@@ -1,12 +1,5 @@
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-
-import javax.swing.JOptionPane;
-
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -30,7 +23,7 @@ public class Main extends Application{
     List<String> linnad;
     Text textMenuCity;
     String city;
-    String aktiivneCity;
+    public String aktiivneCity = "";
     String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
     String fontName2 = "file:resources/fonts/TitilliumWeb-Light.ttf";
     Group juur = new Group();
@@ -53,7 +46,6 @@ public class Main extends Application{
 
 
         for(int n=0; n<=linnadeArv; n++){
-            System.out.println(n);
             Rectangle kast1 = new Rectangle(0, n*30, 150, 30);
             kast1.setFill(Color.rgb(224, 228, 204));
             Rectangle vahejoon = new Rectangle(0, (n*30)+ 28, 150, 2);
@@ -65,20 +57,16 @@ public class Main extends Application{
             juur.getChildren().add(vahejoon);
 
             Text textMenuCity = new Text();
-            System.out.println(linnad.get(n));
             textMenuCity.setText(linnad.get(n));
             textMenuCity.setFont(Font.loadFont(fontName2, 18));
             textMenuCity.setX(10);
-            //if(n!=0)
-                textMenuCity.setY(((n+1)*30)-10);
+            textMenuCity.setY(((n+1)*30)-10);
             juur.getChildren().add(textMenuCity);
         }
         Button LinnaNupp = new Button("Kustuta linn");
         LinnaNupp.setLayoutX(655);
         LinnaNupp.setLayoutY(15);
         juur.getChildren().add(LinnaNupp);
-
-
 
         Rectangle kast3 = new Rectangle(0, (linnadeArv+1)*30, 150, 30);
         kast3.setFill(Color.rgb(224, 228, 204));
@@ -89,52 +77,26 @@ public class Main extends Application{
 
         Text textAddCity = new Text();
         textAddCity.setText("Lisa linn");
-        //textCity.setFont(javafx.scene.text.Font.font("Tahoma", 36));
         textAddCity.setFont(Font.loadFont(fontName, 18));
         textAddCity.setX(40);
         textAddCity.setY(((linnadeArv+2)*30)-10);
         juur.getChildren().add(textAddCity);
         linnad.add(textAddCity.getText());
 
-        /*for (Rectangle kast1 : kastid){
-            System.out.println(kast1);
-        }*/
-
-        //try {
             int lugeja = 0;
             for (Rectangle kast1 : kastid) {
                 Käsitleja k = new Käsitleja(kast1, aktiivneCity, linnad.get(lugeja));
                 kast1.setOnMouseEntered(k);
                 kast1.setOnMouseExited(k);
                 kast1.setOnMouseClicked(k);
+
                 lugeja += 1;
-
-                String vana = k.getVanalinn();
-                System.out.println(vana);
-                //        informatsioon(aktiivneCity, juur, fontName, fontName2);
-
-
-                //kast1.setOnMouse
-            /*
-            kast1.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent me) {
-                    //System.out.println("Hiir läks kasti peale");
-                }
-            });
-            */
           }
-        //}
-        /*catch(Exception e){
-            e.printStackTrace();
-        }*/
-
     }
 
 
     public void informatsioon(String aktiivneCity){
-
         Jsonparse andmed = new Jsonparse(aktiivneCity);
-
 
         // Linna nimi - "Tartu"
         Text textCity = new Text();
@@ -144,7 +106,7 @@ public class Main extends Application{
         textCity.setX(200);
         textCity.setY(50);
         juur.getChildren().add(textCity);
-        System.out.println(andmed.getName());
+        //System.out.println(andmed.getName());
         // Weather description "Mostly Sunny"
         Text textWeatherDesc = new Text();
         textWeatherDesc.setText(andmed.getWeatherDescription().toString());
@@ -206,9 +168,6 @@ public class Main extends Application{
     }
     @Override
     public void start(Stage peaLava){
-        /*String fontName = "file:resources/fonts/TitilliumWeb-Bold.ttf";
-        String fontName2 = "file:resources/fonts/TitilliumWeb-Light.ttf";
-        Group juur = new Group();*/
         // Akna suurust muuta ei saa ja akna servad on eemaldatud.
         peaLava.setTitle("Projekt W");
         peaLava.setResizable(false);
@@ -217,7 +176,6 @@ public class Main extends Application{
         Canvas lõuend = new Canvas(750, 460);
         GraphicsContext gc = lõuend.getGraphicsContext2D();
 
-        // Draw shapes
         // Background
         gc.setFill(Color.rgb(167, 219, 216));
         gc.fillRect(0, 0, 800, 600);
@@ -228,15 +186,6 @@ public class Main extends Application{
         gc.fillRect(150, 0, 2, 600);
 
         juur.getChildren().add(lõuend);
-
-        //aktiivneCity = "Tartu";
-
-        if (aktiivneCity == null) {
-            aktiivneCity = "";
-        }
-
-
-
 
 
         ////////////////////////////////
@@ -250,15 +199,9 @@ public class Main extends Application{
         küljeRuudud();
 
 
-
-
         Scene stseen = new Scene(juur);
         peaLava.setScene(stseen);
         peaLava.show();
-
-
-
-
     }
 
     public static void main(String[] args){
@@ -269,7 +212,6 @@ public class Main extends Application{
 */
 
         launch(args);
-
     }
 }
 

@@ -1,11 +1,8 @@
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 
 class Käsitleja implements EventHandler<MouseEvent> {
     private Rectangle kast;
@@ -26,36 +23,27 @@ class Käsitleja implements EventHandler<MouseEvent> {
         return vanalinn;
     }
 
+    public String getUuslinn(){
+        return uuslinn;
+    }
+
     public void handle(MouseEvent me) {
         if(me.getEventType() == MouseEvent.MOUSE_CLICKED) {
-            vanalinn = uuslinn;
             Main main = new Main();
             main.eemalda();
+            main.aktiivneCity = uuslinn;
             main.informatsioon(uuslinn);
             Stage pea = new Stage();
             main.start(pea);
-            // main.informatsioon("--------------");
-            //main.informatsioon(vanalinn);
-            //System.out.println("Klikkis");
-            //System.out.println(vanalinn);
-
-
-
         }
 
         if(me.getEventType() == MouseEvent.MOUSE_ENTERED) {
-            //kast.setFill(Color.GREEN);
-
             kast.setFill(Color.rgb(243, 134, 48));
             //vahejoon.setFill(Color.rgb(0,0,0));
         }
         else if(me.getEventType() == MouseEvent.MOUSE_EXITED){
-            //kast.setFill(Color.GRAY);
             kast.setFill(Color.rgb(224, 228, 204));
         }
-
-
     }
-
 }
 
