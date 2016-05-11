@@ -4,6 +4,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+
 class Käsitleja implements EventHandler<MouseEvent> {
     private Rectangle kast;
     private String vanalinn;
@@ -28,11 +30,25 @@ class Käsitleja implements EventHandler<MouseEvent> {
     }
 
     public void handle(MouseEvent me) {
-        if(me.getEventType() == MouseEvent.MOUSE_CLICKED) {
+        if(me.getEventType() == MouseEvent.MOUSE_CLICKED && !uuslinn.equals("Lisa linn")) {
             Main main = new Main();
             main.eemalda();
             main.aktiivneCity = uuslinn;
             main.informatsioon(uuslinn);
+            Stage pea = new Stage();
+            main.start(pea);
+        }
+        else if(me.getEventType() == MouseEvent.MOUSE_CLICKED && uuslinn.equals("Lisa linn")){
+            String city = JOptionPane.showInputDialog(null, "Sisestage lisatava linna nimi. ",
+                    JOptionPane.QUESTION_MESSAGE);
+
+            Linnad l = new Linnad();
+            l.lisaLinn(city);
+
+            Main main = new Main();
+            main.eemalda();
+            main.aktiivneCity = city;
+            main.informatsioon(city);
             Stage pea = new Stage();
             main.start(pea);
         }

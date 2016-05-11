@@ -35,15 +35,11 @@ public class Main extends Application{
 
         List<Rectangle> kastid = new ArrayList<Rectangle>();
         List<Rectangle> jooned = new ArrayList<Rectangle>();
-        List<String> linnad = new ArrayList<String>();
-        linnad.add("Tallinn");
-        linnad.add("Tartu");
-        linnad.add("Helsinki");
-        linnad.add("London");
-        linnad.add("Miami");
-        int linnadeArv = 4;
-        // ^ linnad.size()      (-1)??
+        //List<String> linnad = new ArrayList<String>();
 
+        Linnad l = new Linnad();
+        linnad = l.loeAndmed();
+        int linnadeArv = linnad.size()-1;
 
         for(int n=0; n<=linnadeArv; n++){
             Rectangle kast1 = new Rectangle(0, n*30, 150, 30);
@@ -68,20 +64,23 @@ public class Main extends Application{
         LinnaNupp.setLayoutY(15);
         juur.getChildren().add(LinnaNupp);
 
-        Rectangle kast3 = new Rectangle(0, (linnadeArv+1)*30, 150, 30);
-        kast3.setFill(Color.rgb(224, 228, 204));
-        Rectangle vahejoon = new Rectangle(0, ((linnadeArv+2)*30)+ 28, 150, 2);
-        vahejoon.setFill(Color.rgb(0,0,0));
-        kastid.add(kast3);
-        juur.getChildren().add(kast3);
+        if(linnadeArv < 9) {
+            Rectangle kast3 = new Rectangle(0, (linnadeArv+1)*30, 150, 30);
+            kast3.setFill(Color.rgb(224, 228, 204));
+            Rectangle vahejoon = new Rectangle(0, ((linnadeArv+2)*30)+ 28, 150, 2);
+            vahejoon.setFill(Color.rgb(0,0,0));
+            kastid.add(kast3);
+            juur.getChildren().add(kast3);
 
-        Text textAddCity = new Text();
-        textAddCity.setText("Lisa linn");
-        textAddCity.setFont(Font.loadFont(fontName, 18));
-        textAddCity.setX(40);
-        textAddCity.setY(((linnadeArv+2)*30)-10);
-        juur.getChildren().add(textAddCity);
-        linnad.add(textAddCity.getText());
+
+            Text textAddCity = new Text();
+            textAddCity.setText("Lisa linn");
+            textAddCity.setFont(Font.loadFont(fontName, 18));
+            textAddCity.setX(40);
+            textAddCity.setY(((linnadeArv + 2) * 30) - 10);
+            juur.getChildren().add(textAddCity);
+            linnad.add(textAddCity.getText());
+        }
 
             int lugeja = 0;
             for (Rectangle kast1 : kastid) {
@@ -171,7 +170,7 @@ public class Main extends Application{
         // Akna suurust muuta ei saa ja akna servad on eemaldatud.
         peaLava.setTitle("Projekt W");
         peaLava.setResizable(false);
-        peaLava.initStyle(StageStyle.UTILITY);
+        //peaLava.initStyle(StageStyle.UTILITY);
 
         Canvas lõuend = new Canvas(750, 460);
         GraphicsContext gc = lõuend.getGraphicsContext2D();
