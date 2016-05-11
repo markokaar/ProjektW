@@ -73,7 +73,10 @@ public class Main extends Application{
                 textMenuCity.setY(((n+1)*30)-10);
             juur.getChildren().add(textMenuCity);
         }
-
+        Button LinnaNupp = new Button("Kustuta linn");
+        LinnaNupp.setLayoutX(655);
+        LinnaNupp.setLayoutY(15);
+        juur.getChildren().add(LinnaNupp);
 
 
 
@@ -233,14 +236,18 @@ public class Main extends Application{
         }
 
 
-        küljeRuudud();
+
 
 
         ////////////////////////////////
         // Text and information stuff //
         ////////////////////////////////
-
-        informatsioon(aktiivneCity);
+        int o = 0;
+        while (o < 1) {
+            informatsioon(aktiivneCity);
+            o++;
+        }
+        küljeRuudud();
 
 
 
@@ -251,10 +258,7 @@ public class Main extends Application{
 
 
 
-        Button LinnaNupp = new Button("Kustuta linn");
-        LinnaNupp.setLayoutX(655);
-        LinnaNupp.setLayoutY(15);
-        juur.getChildren().add(LinnaNupp);
+
     }
 
     public static void main(String[] args){

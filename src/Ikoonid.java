@@ -16,6 +16,7 @@ public class Ikoonid {
         ikoonid.put("clear sky", new Image("file:resources/weather/clear.png"));
         ikoonid.put("overcast clouds", new Image("file:resources/weather/hazy.png"));
         ikoonid.put("broken clouds", new Image("file:resources/weather/mostlysunny.png"));
+        ikoonid.put("moderate rain", new Image("file:resources/weather/rain03.png"));
         return ikoonid;
 
 
@@ -27,6 +28,7 @@ public class Ikoonid {
         ikoonid.put("clear sky", new Image("file:resources/weather/clearnight.png"));
         ikoonid.put("overcast clouds", new Image("file:resources/weather/cloudynight.png"));
         ikoonid.put("broken clouds", new Image("file:resources/weather/cloudynight.png"));
+        ikoonid.put("moderate rain", new Image("file:resources/weather/rainnight.png"));
         return ikoonid;
     }
 

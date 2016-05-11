@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import javax.swing.*;
 
@@ -31,6 +32,10 @@ class Käsitleja implements EventHandler<MouseEvent> {
             Main main = new Main();
             main.eemalda();
             main.informatsioon(uuslinn);
+            Stage pea = new Stage();
+            main.start(pea);
+            // main.informatsioon("--------------");
+            //main.informatsioon(vanalinn);
             //System.out.println("Klikkis");
             //System.out.println(vanalinn);
 
