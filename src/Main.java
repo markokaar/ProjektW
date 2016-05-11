@@ -1,5 +1,6 @@
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -7,6 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
@@ -63,6 +67,21 @@ public class Main extends Application{
         LinnaNupp.setLayoutX(655);
         LinnaNupp.setLayoutY(15);
         juur.getChildren().add(LinnaNupp);
+
+        LinnaNupp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent keyEvent) {
+                Linnad l = new Linnad();
+                l.eemaldaLinn(aktiivneCity);
+
+                Main main = new Main();
+                main.eemalda();
+                main.informatsioon(aktiivneCity);
+                Stage pea = new Stage();
+                main.start(pea);
+            }
+        });
+
+
 
         if(linnadeArv < 9) {
             Rectangle kast3 = new Rectangle(0, (linnadeArv+1)*30, 150, 30);

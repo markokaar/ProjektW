@@ -41,4 +41,23 @@ public class Linnad {
             e.printStackTrace();
         }
     }
+
+    void eemaldaLinn(String linnanimi){
+        try{
+        linnadelist = loeAndmed();
+        linnadelist.remove(linnanimi);
+
+        PrintWriter writer = new PrintWriter("linnad.txt", "UTF-8");
+
+        for(String linn : linnadelist){
+            writer.println(linn);
+        }
+
+        writer.close();
+        }catch(FileNotFoundException e){
+            e.printStackTrace();
+        }catch(UnsupportedEncodingException e){
+            e.printStackTrace();
+        }
+    }
 }
